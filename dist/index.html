@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>reveal.js</title>
+    <script type="module" crossorigin src="./assets/index-CijI7AOU.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CFwJhjWr.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- 1 -->
+        <section>
+          <h1>Design Patterns in JavaScript</h1>
+          <p>
+            <small>Created by <a href="https://github.com/adAstra97">adAstra97</a></small>
+          </p>
+        </section>
+        <!-- 2 -->
+        <section>
+          <h2>What's a design pattern?</h2>
+          <p>
+            <b>Design patterns</b> are typical solutions to commonly occurring problems in software design. They are
+            like pre-made blueprints that you can customize to solve a recurring design problem in your code.
+          </p>
+        </section>
+        <!-- 4 -->
+        <section>
+          <h3>Why should I learn patterns?</h3>
+          <ul>
+            <li>Tested solutions</li>
+            <li>Code standardization</li>
+            <li>Common programming vocabulary</li>
+          </ul>
+        </section>
+        <!-- 5 -->
+        <section>
+          <h3>Main groups of patterns</h3>
+          <img src="./design-patterns.png" alt="design-patterns" />
+        </section>
+        <!-- 6 & 7-->
+        <section>
+          <h2>Creational patterns</h2>
+          <img src="Creational-Design-Patterns.webp" alt="Creational-Design-Patterns" />
+        </section>
+        <!-- 8 -->
+        <section>
+          <section>
+            <h3>Singleton Pattern</h3>
+            <p>Singleton is a design pattern that ensures that a class has only one immutable instance.</p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="cod/e-title">Singleton code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class Config {
+                constructor() {}
+
+                start() {
+                  console.log('App has started')
+                }
+
+                update() {
+                  console.log('App has updated')
+                }
+              }
+
+              const instance = new Config()
+              Object.freeze(instance)
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 9 -->
+        <section>
+          <section>
+            <h3>Factory Method Pattern</h3>
+            <p>
+              The Factory method pattern provides an interface for creating objects that can be modified after creation.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Factory Method Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class Alien {
+                constructor (name, phrase) {
+                    this.name = name
+                    this.phrase = phrase
+                    this.species = "alien"
+                }
+
+                fly = () => console.log("Zzzzzziiiiiinnnnnggggg!!")
+                sayPhrase = () => console.log(this.phrase)
+              }
+            
+              const alien1 = new Alien("Ali", "I'm Ali the alien!")
+              console.log(alien1.name) // output: "Ali"
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 10 -->
+        <section>
+          <section>
+            <h3>Abstract Factory Pattern</h3>
+            <p>
+              The Abstract Factory pattern lets us create groups of related objects without needing to specify exact
+              classes.
+            </p>
+            <p>
+              Here’s how it works: we have an abstract factory that the client interacts with. This abstract factory
+              then calls the specific concrete factory based on the logic, and that concrete factory produces the final
+              object.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Abstract Factory Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              // We have a class or "concrete factory" for each vehicle type
+              class Car {
+                  constructor () {
+                      this.name = "Car"
+                      this.wheels = 4
+                  }
+                  turnOn = () => console.log("Chacabúm!!")
+              }
+              
+              class Truck {
+                  constructor () {
+                      this.name = "Truck"
+                      this.wheels = 8
+                  }
+                  turnOn = () => console.log("RRRRRRRRUUUUUUUUUMMMMMMMMMM!!")
+              }
+              
+              class Motorcycle {
+                  constructor () {
+                      this.name = "Motorcycle"
+                      this.wheels = 2
+                  }
+                  turnOn = () => console.log("sssssssssssssssssssssssssssssshhhhhhhhhhham!!")
+              }
+              
+              // And and abstract factory that works as a single point of interaction for our clients
+              // Given the type parameter it receives, it will call the corresponding concrete factory
+              const vehicleFactory = {
+                  createVehicle: function (type) {
+                      switch (type) {
+                          case "car":
+                              return new Car()
+                          case "truck":
+                              return new Truck()
+                          case "motorcycle":
+                              return new Motorcycle()
+                          default:
+                              return null
+                      }
+                  }
+              }
+              
+              const car = vehicleFactory.createVehicle("car") // Car { turnOn: [Function: turnOn], name: 'Car', wheels: 4 }
+              const truck = vehicleFactory.createVehicle("truck") // Truck { turnOn: [Function: turnOn], name: 'Truck', wheels: 8 }
+              const motorcycle = vehicleFactory.createVehicle("motorcycle") // Motorcycle { turnOn: [Function: turnOn], name: 'Motorcycle', wheels: 2 }
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 11 -->
+        <section>
+          <section>
+            <h3>Builder Pattern</h3>
+            <p>
+              The Builder pattern is used to create objects in "steps". Normally we will have functions or methods that
+              add certain properties or methods to our object.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Builder Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              // We declare our objects
+              const bug1 = {
+                  name: "Buggy McFly",
+                  phrase: "Your debugger doesn't work with me!"
+              }
+              
+              const bug2 = {
+                  name: "Martiniano Buggland",
+                  phrase: "Can't touch this! Na na na na..."
+              }
+              
+              // These functions take an object as parameter and add a method to them
+              const addFlyingAbility = obj => {
+                  obj.fly = () => console.log(`Now ${obj.name} can fly!`)
+              }
+              
+              const addSpeechAbility = obj => {
+                  obj.saySmthg = () => console.log(`${obj.name} walks the walk and talks the talk!`)
+              }
+              
+              // Finally we call the builder functions passing the objects as parameters
+              addFlyingAbility(bug1)
+              bug1.fly() // output: "Now Buggy McFly can fly!"
+              
+              addSpeechAbility(bug2)
+              bug2.saySmthg() // output: "Martiniano Buggland walks the walk and talks the talk!"
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 12 -->
+        <section>
+          <section>
+            <h3>Prototype Pattern</h3>
+            <p>
+              The Prototype pattern allows you to create an object using another object as a blueprint, inheriting its
+              properties and methods.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Prototype Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              // We declare our prototype object with two methods
+              const enemy = {
+                  attack: () => console.log("Pim Pam Pum!"),
+                  flyAway: () => console.log("Flyyyy like an eagle!")
+              }
+              
+              // We declare another object that will inherit from our prototype
+              const bug1 = {
+                  name: "Buggy McFly",
+                  phrase: "Your debugger doesn't work with me!"
+              }
+              
+              // With setPrototypeOf we set the prototype of our object
+              Object.setPrototypeOf(bug1, enemy)
+              
+              // With getPrototypeOf we read the prototype and confirm the previous has worked
+              console.log(Object.getPrototypeOf(bug1)) // { attack: [Function: attack], flyAway: [Function: flyAway] }
+              
+              console.log(bug1.phrase) // Your debugger doesn't work with me!
+              console.log(bug1.attack()) // Pim Pam Pum!
+              console.log(bug1.flyAway()) // Flyyyy like an eagle!
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 13 -->
+        <section>
+          <h2>Structural Design Patterns</h2>
+          <img src="./Structural-Design-Patterns.webp" alt="Structural-Design-Patterns" />
+        </section>
+        <!-- 14 -->
+        <section>
+          <section>
+            <h3>Adapter Pattern</h3>
+            <p>The Adapter allows two objects with incompatible interfaces to interact with each other.</p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Adapter Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              // Our array of cities
+              const citiesHabitantsInMillions = [
+                  { city: "London", habitants: 8.9 },
+                  { city: "Rome", habitants: 2.8 },
+                  { city: "New york", habitants: 8.8 },
+                  { city: "Paris", habitants: 2.1 },
+              ] 
+              
+              // The new city we want to add
+              const BuenosAires = {
+                  city: "Buenos Aires",
+                  habitants: 3100000
+              }
+              
+              // Our adapter function takes our city and converts the habitants property to the same format all the other cities have
+              const toMillionsAdapter = city => { city.habitants = parseFloat((city.habitants/1000000).toFixed(1)) }
+              
+              toMillionsAdapter(BuenosAires)
+              
+              // We add the new city to the array
+              citiesHabitantsInMillions.push(BuenosAires)
+              
+              // And this function returns the largest habitants number
+              const MostHabitantsInMillions = () => {
+                  return Math.max(...citiesHabitantsInMillions.map(city => city.habitants))
+              }
+              
+              console.log(MostHabitantsInMillions()) // 8.9
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 15 -->
+        <section>
+          <section>
+            <h3>Bridge Design Pattern</h3>
+            <p>
+              Bridge is a structural design pattern that lets you split a large class or a set of closely related
+              classes into two separate hierarchies—abstraction and implementation—which can be developed independently
+              of each other.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Bridge Design Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              // Implementor
+              class Printer {
+                  print() {
+                      throw new Error('This method must be overwritten!');
+                  }
+              }
+              // ConcreteImplementor 1
+              class InkjetPrinter extends Printer {
+                  print() {
+                      console.log('Printing with an inkjet printer');
+                  }
+              }
+              // ConcreteImplementor 2
+              class LaserPrinter extends Printer {
+                  print() {
+                      console.log('Printing with a laser printer');
+                  }
+              }
+              // Abstraction
+              class Document {
+                  constructor(printer) {
+                      this.printer = printer;
+                  }
+                  print() {
+                      this.printer.print();
+                  }
+              }
+              // Client
+              const doc1 = new Document(new InkjetPrinter());
+              doc1.print(); // Output: Printing with an inkjet printer
+              const doc2 = new Document(new LaserPrinter());
+              doc2.print(); // Output: Printing with a laser printer
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 16 -->
+        <section>
+          <section>
+            <h3>Composite Pattern</h3>
+            <p>
+              Composite is a structural design pattern that lets you compose objects into tree structures and then work
+              with these structures as if they were individual objects.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Composite Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              // Component
+              class Component {
+                  constructor(name) {
+                      this._name = name;
+                  }
+                  // Method that should be implemented in child classes
+                  operation() {
+                      throw new Error("The operation method must be implemented");
+                  }
+              }
+              // Leaf
+              class Leaf extends Component {
+                  constructor(name){
+                      super(name);
+                  }
+                  operation() {
+                      return this._name;
+                  }
+              }
+              // Composite
+              class Composite extends Component {
+                  constructor(name){
+                      super(name);
+                      this._children = [];
+                  }
+                  operation() {
+                      return `Branch(${this._name}): ${this._children.map(child => child.operation()).join(', ')}`;
+                  }
+                  add(component) {
+                      this._children.push(component);
+                  }
+              
+                  remove(component) {
+                      this._children = this._children.filter(child => child !== component);
+                  }
+              }
+              
+              // Usage
+              const tree = new Composite('Tree');
+              const branch1 = new Composite('Branch 1');
+              const branch2 = new Composite('Branch 2');
+              branch1.add(new Leaf('Leaf 1'));
+              branch1.add(new Leaf('Leaf 2'));
+              branch2.add(new Leaf('Leaf 3'));
+              tree.add(branch1);
+              tree.add(branch2);
+              console.log(tree.operation());
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 17 -->
+        <section>
+          <section>
+            <h3>Decorator Pattern</h3>
+            <p>
+              Decorator is a structural pattern that allows adding new behaviors to objects dynamically by placing them
+              inside special wrapper objects, called decorators.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Decorator Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class Espresso {
+                getCost() {
+                  return 30;
+                }
+                getDescription() {
+                  return 'Espresso';
+                }
+              }
+
+              class CoffeeDecorator {
+                constructor(coffee) {
+                  this.coffee = coffee;
+                }
+                getCost() {
+                  return this.coffee.getCost();
+                }
+                getDescription() {
+                  return this.coffee.getDescription();
+                }
+              }
+
+              class Caramel extends CoffeeDecorator {
+                constructor(coffee) {
+                  super(coffee);
+                }
+                getCost() {
+                  return this.coffee.getCost() + 5;
+                }
+                getDescription() {
+                  return this.coffee.getDescription() + ' with caramel';
+                }
+              }
+
+              class Vanilla extends CoffeeDecorator {
+                constructor(coffee) {
+                  super(coffee);
+                }
+                getCost() {
+                  return this.coffee.getCost() + 10;
+                }
+                getDescription() {
+                  return this.coffee.getDescription() + ' with vanilla';
+                }
+              }
+
+              let coffee = new Espresso();
+              console.log(Coffee:', coffee.getDescription());
+              console.log(Price:', coffee.getCost());
+               
+              let tastyCoffee = new Vanilla(new Caramel(new Espresso ()));
+              console.log(Coffee:', tastyCoffee.getDescription());
+              console.log(Price:', tastyCoffee.getCost());
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 18 -->
+        <section>
+          <section>
+            <h3>Facade Pattern</h3>
+            <p>
+              The Facade pattern provides a simplified interface to a library, a framework, or any other complex set of
+              classes.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Facade Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class Light {
+                on() {
+                    console.log('light is on');
+                }
+                off() {
+                    console.log('light is off');
+                }
+            }
+
+            class Screen {
+                on() {
+                    console.log('screen is on');
+                }
+                off() {
+                    console.log('screen is off');
+                }
+            }
+
+            class Projector {
+                on() {
+                    console.log('projector is on');
+                }
+                off() {
+                    console.log('projector is off');
+                }
+            }
+
+            class Music {
+                on() {
+                    console.log('music system is on');
+                }
+                off() {
+                    console.log('music system is off');
+                }
+            }
+            
+            class CinemaFacade {
+              constructor(light, screen, projector, music) {
+                  this.light = light;
+                  this.screen = screen;
+                  this.projector = projector;
+                  this.music = music;
+              }
+              start() {
+                  this.light.off();
+                  this.screen.on();
+                  this.projector.on();
+                  this.music.on();
+              }
+              stop() {
+                  this.projector.off();
+                  this.music.off();
+                  this.screen.off();
+                  this.light.on();
+              }
+            }
+            
+            let light = new Light();
+            let screen = new Screen();
+            let projector = new Projector();
+            let music = new Music();
+            let cinema = new CinemaFacade(light, screen, projector, music);
+            cinema.start();
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 19 -->
+        <section>
+          <section>
+            <h3>Proxy Pattern</h3>
+            <p>
+              <b>Proxy</b> is a structural design pattern that provides an object that acts as a substitute for a real
+              service object used by a client. A proxy receives client requests, does some work (access control,
+              caching, etc.) and then passes the request to a service object.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Proxy Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class Car {
+                drive() {
+                  return 'driving';
+                }
+              }
+
+              class CarProxy {
+                constructor(driver) {
+                  this.driver = driver;
+                }
+
+                drive() {
+                  return this.driver.age < 18 ? 'too young to drive' : new Car().drive();
+                }
+              }
+
+              class Driver {
+                constructor(age) {
+                  this.age = age;
+                }
+              }
+              
+              let driver = new Driver(16);
+              let car = new CarProxy(driver);
+              console.log(car.drive());
+
+              let driver2 = new Driver(26);
+              let car2 = new CarProxy(driver2);
+              console.log(car2.drive());
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 20 -->
+        <section>
+          <section>
+            <h3>Flyweight Pattern</h3>
+            <p>
+              <b>Flyweight</b> is a structural design pattern that allows programs to support vast quantities of objects
+              by keeping their memory consumption low.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Flyweight Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class ParticleType {
+                /* The lightweight class only stores the immutable state and methods of particles */
+                constructor(type, color) {
+                  this.type = type;
+                  this.color = color;
+                }
+                draw(context, x, y) {
+                  /* Draw a particle of the required type and color in the required coordinates in the provided drawing context */
+                  console.log(`Particle of type ${this.type} color ${this.color} is drawn at coordinates (${x}, ${y})`);
+                }
+              }
+              class ParticlesFactory {
+                constructor() {
+                  /* Collection of already created particles that can be reused */
+                  this.types = [];
+                }
+                getParticleType(type, color) {
+                  // Find a similar particle in the collection
+                  // The implementation of the search method can be any
+                  let particleType;
+                  for (let i = 0; i < this.types.length; i++) {
+                    if (this.types[i].type == type && this.types[i].color == color) {
+                      particleType = this.types[i];
+                      break;
+                    }
+                  }
+                  // If there is no such particle, create a new one
+                  if (!particleType) {
+                    particleType = new ParticleType(type, color);
+                    this.types.push(particleType);
+                  } else {
+                    console.log(`Type ${type} color ${color} already exists`);
+                  }
+                  return particleType;
+                }
+              }
+              
+              /*  Specific particles only store the changing external state */
+              class Particle {
+                constructor(x, y, type) {
+                  this.x = x;
+                  this.y = y;
+                  this.type = type;
+                }
+                draw(context) {
+                  this.type.draw(context, this.x, this.y);
+                }
+              }
+              class Game {
+                constructor() {
+                  this.particles = [];
+                  this.factory = new ParticlesFactory();
+                }
+                addParticle(x, y, type, color) {
+                  let particleType = this.factory.getParticleType(type, color);
+                  let particle = new Particle(x, y, particleType);
+                  this.particles.push(particle);
+                }
+                draw(context) {
+                  this.particles.forEach(particle => {
+                    particle.draw(context);
+                  })
+                }
+              }
+              let context = 'drawing context';
+              let game = new Game();
+              game.addParticle(10, 10, 'bullet', 'black');
+              game.addParticle(30, 30, 'bullet', 'green');
+              game.addParticle(60, 60, 'shrapnel', 'black');
+              game.addParticle(80, 80, 'shrapnel', 'yellow');
+              
+              game.draw(context);
+              
+              // Particle of type bullet color black drawn at coordinates (10, 10)
+              // Particle of type bullet color green drawn at coordinates (30, 30)
+              // Particle of type shrapnel color black drawn at coordinates (60, 60)
+              // Particle of type shrapnel color yellow drawn at coordinates (80, 80)
+              
+              // if you add a particle of an already existing type
+              // but with a different external state
+              game.addParticle(100, 100, 'bullet', 'black');
+              // ParticlesFactory will not have a new type of particle,
+              // but will use the already existing one
+              console.log(game.factory.types.length); // 4
+              
+            </script></code></pre>
+          </section>
+        </section>
+        <!-- 21 -->
+        <section>
+          <h3>Behavioral Patterns</h3>
+          <img src="./Behavioral-patterns.png" alt="Behavioral-patterns" />
+        </section>
+        <!-- 22 -->
+        <section>
+          <section>
+            <h3>Chain of Responsibility Pattern</h3>
+            <p>
+              The Chain of Responsibility passes requests along a chain of handlers. Each handler decides either to
+              process the request or to pass it to the next handler in the chain.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Chain of Responsibility Pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              // Create a Request class to represent a money withdrawal request
+              class Request {
+                  constructor(amount) {
+                      this.amount = amount;
+                      console.log(`Requested: $${amount}\n`);
+                  }
+                  // The get method processes the request and passes it to the next handler
+                  get(bill) {
+                      const count = Math.floor(this.amount / bill);
+                      this.amount -= count * bill;
+                      console.log(`Dispensed ${count} bills of $${bill}`);
+                      return this;
+                  }
+              }
+              // Example usage
+              function run() {
+                  const request = new Request(378);
+                  request.get(100).get(50).get(20).get(10).get(5).get(1);
+              }
+              run();              
+                    </script></code></pre>
+          </section>
+        </section>
+        <!-- 23 -->
+        <section>
+          <section>
+            <h3>Command pattern</h3>
+            <p>
+              Command is behavioral design pattern that converts requests or simple operations into objects. The Command
+              pattern is pretty common in TypeScript code. Most often it’s used as an alternative for callbacks to
+              parameterizing UI elements with actions. It’s also used for queueing tasks, tracking operations history,
+              etc.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Command pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              // Create command classes
+              class LightOnCommand {
+                  constructor(light) {
+                      this.light = light;
+                  }
+                  execute() {
+                      this.light.turnOn();
+                  }
+              }
+              class LightOffCommand {
+                  constructor(light) {
+                      this.light = light;
+                  }
+                  execute() {
+                      this.light.turnOff();
+                  }
+              }
+              // Create device objects (receivers)
+              class Light {
+                  turnOn() {
+                      console.log('Light is on');
+                  }
+                  turnOff() {
+                      console.log('Light is off');
+                  }
+              }
+              // Create a remote control
+              class RemoteControl {
+                  constructor() {
+                      this.commands = [];
+                  }
+                  addCommand(command) {
+                      this.commands.push(command);
+                  }
+                  pressButton() {
+                      this.commands.forEach(command => command.execute());
+                  }
+              }
+              // Using the Command pattern
+              const light = new Light();
+              const lightOn = new LightOnCommand(light);
+              const lightOff = new LightOffCommand(light);
+              const remote = new RemoteControl();
+              remote.addCommand(lightOn);
+              remote.addCommand(lightOff);
+              // Press buttons on the remote
+              remote.pressButton(); // Turns on the light
+              remote.pressButton(); // Turns off the light
+              
+                    </script></code></pre>
+          </section>
+        </section>
+        <!-- 24 -->
+        <section>
+          <h3>Iterator pattern</h3>
+          <p>
+            The iterator is used to traverse elements of a collection. Any of the JavaScript built in functions we have
+            at our disposal to iterate over data structures (<b>for, forEach, for...of, for...in, map, reduce, filter</b
+            >, and so on) are examples of the iterator pattern. Same as any traversing algorithm we code to iterate
+            through more complex data structures like trees or graphs.
+          </p>
+        </section>
+        <!-- 25 -->
+        <section>
+          <section>
+            <h3>Mediator pattern</h3>
+            <p>
+              The Mediator pattern helps components in a program communicate indirectly through a special mediator object. By doing so, it reduces the tight coupling between these components.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Mediator pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class Airplane {
+                constructor(position, trafficTower) {
+                  this.position = position;
+                  this.trafficTower = trafficTower;
+                  this.trafficTower.airplanes.push(this);
+                }
+                requestPositions() {
+                  return this.trafficTower.requestPositions();
+                }
+              }
+              class TrafficTower {
+                constructor() {
+                  this.airplanes = [];
+                }
+                requestPositions() {
+                  return this.airplanes.map(airplane => {
+                    return airplane.position;
+                  });
+                }
+              }
+              let trafficTower = new TrafficTower();
+              let airplane1 = new Airplane([55.45, 37.36], trafficTower);
+              let airplane2 = new Airplane([55.65, 36.18], trafficTower);
+              let airplane3 = new Airplane([53.23, 29.02], trafficTower);
+              console.log(airplane1.requestPositions());
+              
+                    </script></code></pre>
+          </section>
+        </section>
+        <!-- 26 -->
+        <section>
+          <section>
+            <h3>Memento pattern</h3>
+            <p>
+              The Memento design pattern is a behavioral pattern that is used to capture and restore an object’s internal state without violating encapsulation.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Memento pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class Document {
+                constructor(content) {
+                  this.content = content;
+                }
+                save() {
+                  return this.content;
+                }
+                restore(savedContent) {
+                  this.content = savedContent;
+                }
+              }
+              const document = new Document("Initial content");
+              const savedContent = document.save(); // Save the initial state
+              document.content = "Updated content"; // Modify the document
+              console.log(document.content); // Output: "Updated content"
+              document.restore(savedContent); // Restore the previous state
+              console.log(document.content); // Output: "Initial content"
+              
+                    </script></code></pre>
+          </section>
+        </section>
+        <!-- 27 -->
+        <section>
+          <section>
+            <h3>Observer pattern</h3>
+            <p>
+              Observer is a behavioral design pattern that allows some objects to notify other objects about changes in their state.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Observer pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class TaskList {
+                constructor() {
+                  this.tasks = [];
+                  this.observers = [];
+                }
+                addTask(task) {
+                  this.tasks.push(task);
+                  this.notifyObservers();
+                }
+                removeTask(task) {
+                  this.tasks = this.tasks.filter(t => t !== task);
+                  this.notifyObservers();
+                }
+                notifyObservers() {
+                  this.observers.forEach(observer => observer.update(this.tasks));
+                }
+                addObserver(observer) {
+                  this.observers.push(observer);
+                }
+              }
+
+              class TaskObserver {
+                update(tasks) {
+                  console.log('Task list updated:');
+                  tasks.forEach((task, index) => {
+                    console.log(`${index + 1}. ${task}`);
+                  });
+                }
+              }
+              
+              const myTaskList = new TaskList();
+              const observerA = new TaskObserver();
+              const observerB = new TaskObserver();
+              myTaskList.addObserver(observerA);
+              myTaskList.addObserver(observerB);
+              // Add tasks to the list
+              myTaskList.addTask('Prepare presentation');
+              myTaskList.addTask('Finish report');
+              myTaskList.addTask('Buy groceries');
+              // Remove one of the tasks
+              myTaskList.removeTask('Finish report');
+                            
+                    </script></code></pre>
+          </section>
+        </section>
+        <!-- 28 -->
+        <section>
+          <section>
+            <h3>State pattern</h3>
+            <p>
+              State is a behavioral design pattern that allows an object to change the behavior when its internal state changes.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">State pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class TrafficLight {
+                constructor() {
+                  this.state = 'red'; // Initial state - red
+                }
+                changeState() {
+                  switch (this.state) {
+                    case 'red':
+                      this.state = 'green';
+                      break;
+                    case 'green':
+                      this.state = 'yellow';
+                      break;
+                    case 'yellow':
+                      this.state = 'red';
+                      break;
+                    default:
+                      console.error('Invalid traffic light state');
+                  }
+                }
+                displayMessage() {
+                  switch (this.state) {
+                    case 'red':
+                      console.log('STOP! The traffic light is red.');
+                      break;
+                    case 'green':
+                      console.log('GO! The traffic light is green.');
+                      break;
+                    case 'yellow':
+                      console.log('Prepare! The traffic light is yellow.');
+                      break;
+                    default:
+                      console.error('Invalid traffic light state');
+                  }
+                }
+              }
+              // Let's use our traffic light
+              const trafficLight = new TrafficLight();
+              trafficLight.displayMessage(); // Output: "STOP! The traffic light is red."
+              trafficLight.changeState(); // Switch the state
+              trafficLight.displayMessage(); // Output: "GO! The traffic light is green."
+              
+                    </script></code></pre>
+          </section>
+        </section>
+        <!-- 29 -->
+        <section>
+          <section>
+            <h3>Strategy pattern</h3>
+            <p>
+              Strategy is a behavioral design pattern that turns a set of behaviors into objects and makes them interchangeable inside original context object.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Strategy pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class DiscountCard {
+                constructor(discount) {
+                  this.discount = discount;
+                  this.amount = 0;
+                }
+                checkout() {
+                  return this.discount(this.amount);
+                }
+                setAmount(amount) {
+                  this.amount = amount;
+                }
+              }
+              
+              function guestStrategy(amount) {
+                return amount;
+              }
+              function regularStrategy(amount) {
+                return amount * 0.9;
+              }
+              function premiumStrategy(amount) {
+                return amount * 0.8;
+              }
+              
+              let amount = 1000;
+              let guestCard = new DiscountCard(guestStrategy);
+              guestCard.setAmount(amount);
+              console.log('With guest discount', guestCard.checkout());
+
+              let regularCard = new DiscountCard(regularStrategy);
+              regularCard.setAmount(amount);
+              console.log('With regular discount', regularCard.checkout());
+              
+              let premiumCard = new DiscountCard(premiumStrategy);
+              premiumCard.setAmount(amount);
+              console.log('With premium discount', premiumCard.checkout());
+                    </script></code></pre>
+          </section>
+        </section>
+        <!-- 30 -->
+        <section>
+          <section>
+            <h3>Template Method pattern</h3>
+            <p>
+              Template Method is a behavioral design pattern that allows you to define a skeleton of an algorithm in a base class and let subclasses override the steps without changing the overall algorithm’s structure.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Template Method pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              // Abstract class for beverages
+              class Beverage {
+                prepare() {
+                  this.boilWater();
+                  this.brew();
+                  this.pourInCup();
+                  this.serve();
+                }
+                boilWater() {
+                  console.log("Boiling water...");
+                }
+                // This method will be overridden in subclasses
+                brew() {}
+                pourInCup() {
+                  console.log("Pouring into a cup...");
+                }
+                // This method will be overridden in subclasses
+                serve() {}
+              }
+              // Concrete class for coffee
+              class Coffee extends Beverage {
+                brew() {
+                  console.log("Brewing coffee...");
+                }
+                serve() {
+                  console.log("Serving coffee with milk.");
+                }
+              }
+              // Concrete class for tea
+              class Tea extends Beverage {
+                brew() {
+                  console.log("Brewing tea...");
+                }
+                serve() {
+                  console.log("Serving tea with lemon.");
+                }
+              }
+              // Create instances
+              const myCoffee = new Coffee();
+              myCoffee.prepare();
+              const myTea = new Tea();
+              myTea.prepare();
+                          
+                    </script></code></pre>
+          </section>
+        </section>
+        <!-- 31 -->
+        <section>
+          <section>
+            <h3>Visitor pattern</h3>
+            <p>
+              Visitor is a behavioral design pattern that allows adding new behaviors to existing class hierarchy without altering any existing code.
+            </p>
+          </section>
+          <section data-auto-animate>
+            <h3 data-id="code-title">Visitor  pattern code example</h3>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers><script type="text/template">
+              class Employee {
+                constructor(salary) {
+                  this.bonus = 0;
+                  this.salary = salary;
+                }
+                accept(item) {
+                  item(this);
+                }
+              }
+              class Manager extends Employee {
+                constructor(salary) {
+                  super(salary);
+                }
+              }
+              class Developer extends Employee {
+                constructor(salary) {
+                  super(salary);
+                }
+              }
+              function bonusPattern(employee) {
+                if (employee instanceof Manager) employee.bonus = employee.salary * 2;
+                if (employee instanceof Developer) employee.bonus = employee.salary;
+              }
+              let developer = new Developer(80000);
+              let manager = new Manager(80000);
+              bonusPattern(developer);
+              console.log('Developer Bonus', developer.bonus);
+              bonusPattern(manager);
+              console.log('Manager Bonus', manager.bonus);
+                    </script></code></pre>
+          </section>
+        </section>
+        <!-- 32 -->
+        <section>
+          <h2>Thanks for your attention</h2>
+        </section>
+      </div>
+    </div>
+
+  </body>
+</html>
